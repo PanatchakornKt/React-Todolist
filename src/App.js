@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react'
+import Headbar from './components/Head'
+import Form from './components/Form'
+import TodosList from './components/TodosList'
 
-function App() {
-  return (
+const App = () => {
+
+  const [input, setInput] = useState("")
+  const [todos, setTodos] = useState([])
+  const [status, setStatus] = useState('all')
+  const [filteredTodos, setFilteredTodos] = useState([])
+
+  useEffect(() => {
+  const filterHandle = () => {
+    switch(status){
+      case 'completed' :
+        setFilteredTodos(todos.filter(todo => todo.completed === true))
+        break
+      case 'uncompleted' :
+        setFilteredTodos(todos.filter(todo => todo.completed === false))
+        break
+      default :
+        setFilteredTodos(todos)
+        break
+    }
+  }
+    filterHandle() 
+  }, [todos, status])
+
+  console.log(todos)
+
+  return(
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Headbar />
+      </div>
+      <div>
+        <Form 
+          input = {input}
+          setInput = {setInput}
+          todos = {todos}
+          setTodos = {setTodos}
+          status = {status}
+          setStatus = {setStatus}
+        />
+      </div>
+      <div>
+        <TodosList 
+          todos = {todos}
+          setTodos = {setTodos}
+          filteredTodos = {filteredTodos}
+        />
+      </div>
     </div>
-  );
+  )
 }
+export default App
 
-export default App;

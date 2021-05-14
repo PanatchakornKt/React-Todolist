@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 
-const AddTodo = ({ setStatus, todos, setTodos}) => {
+const AddTodo = ({ setStatus, todos, setTodos }) => {
   const [input, setInput] = useState("");
 
   const onInputChange = (e) => {
     setInput(e.target.value);
   };
 
-  const onFormSubmit = (e) => {
+  const onAddtodo = (e) => {
     e.preventDefault();
-    setTodos([
-      ...todos,
-      { id: Math.random() * 1000, title: input, completed: false },
-    ]);
+    const id = Math.random() * 1000;
+    setTodos([...todos, { id, title: input, completed: false }]);
     setInput("");
   };
 
@@ -22,7 +20,7 @@ const AddTodo = ({ setStatus, todos, setTodos}) => {
 
   return (
     <div>
-      <form className="container mx-auto px-6 py-3" onSubmit={onFormSubmit}>
+      <form className="container mx-auto px-6 py-3" onSubmit={onAddtodo}>
         TO DO :
         <input
           type="text"

@@ -1,8 +1,7 @@
 import React from "react";
 
 const DisplayTodo = ({ todos, setTodos, filteredTodos }) => {
-
-  const onComplete = todo => {
+  const onComplete = (todo) => {
     setTodos(
       todos.map((item) => {
         if (item.id === todo.id) {
@@ -13,13 +12,13 @@ const DisplayTodo = ({ todos, setTodos, filteredTodos }) => {
     );
   };
 
-  const onDelete = id => {
+  const onDelete = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
     <div>
-      {filteredTodos.map(todo => (
+      {filteredTodos.map((todo) => (
         <section
           className="flex bg-white container mx-auto px-6 py-3"
           key={todo.id}

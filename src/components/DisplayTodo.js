@@ -1,15 +1,6 @@
 import React from "react";
 
 const DisplayTodo = ({ todos, setTodos, filteredTodos }) => {
-  const checkComplete = id => {
-    const updatedTodos = [...todos].map((todo) => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed;
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  };
 
   const onComplete = todo => {
     setTodos(
@@ -36,7 +27,7 @@ const DisplayTodo = ({ todos, setTodos, filteredTodos }) => {
           <div className="w-full rounded-lg shadow-lg p-4">
             <input
               type="checkbox"
-              onChange={() => checkComplete(todo.id)}
+              onChange={() => onComplete(todo)}
               checked={todo.completed}
             />
             <input
